@@ -181,10 +181,8 @@ class GroupsController extends Controller
         if ($count1 > 0 || $count2 > 0) {
             GroupSubjects::deleteAll(['group_id' => $id]);
             GroupTeachers::deleteAll(['group_id' => $id]);
-            $this->findModel($id)->delete();
-        } else {
-            $this->findModel($id)->delete();
         }
+        $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }
 

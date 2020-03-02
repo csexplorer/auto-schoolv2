@@ -27,9 +27,23 @@ $group_id = Yii::$app->request->get()['group_id'];
 
     <?= $form->field($model, 'phone_number')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'photo')->textInput(['maxlength' => true]) ?>
+<!--    --><?//= $form->field($model, 'photo')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'start_date')->textInput() ?>
+<!--    --><?//= $form->field($model, 'start_date')->textInput() ?>
+    <?
+    echo '<label class="control-label">Boshlash sanasi</label>';
+    echo kartik\date\DatePicker::widget([
+        'model' => $model,
+        'attribute' => 'start_date',
+        'type' => 3,
+        'removeButton' => false,
+        'options' => ['placeholder' => 'Boshlash sanasi'],
+        'pluginOptions' => [
+            'autoclose' => true,
+            'format' => 'dd.mm.yyyy',
+            'todayHighlight' => true
+        ]
+    ]); ?>
 
     <?= $form->field($model, 'payment')->textInput() ?>
 

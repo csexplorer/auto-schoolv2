@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\GroupSubjects;
 use Yii;
 use app\models\Subject;
 use app\models\SubjectTeachers;
@@ -119,8 +120,13 @@ class SubjectController extends Controller
      */
     public function actionDelete($id)
     {
+        $count1 = SubjectTeachers::find()->where(['subject_id' => $id])->count();
+        $count2 = GroupSubjects::find()->where(['subject_id' => $id])->count();
+        if ($count1 > 0 || $count2 > 0) {
+            SubjectTeachers::deleteAll(['subject_id' => $id]);
+            GroupSubjects::deleteAll(['subject_id' => $id]);
+        }
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
 

@@ -39,7 +39,7 @@ $this->registerCss($style);
             [
                 'header' => 'Avatar',
                 'value' => function($model) {
-                    $avatar = !empty($model->photo) ? "/uploads/".$model->photo : "/dist/img/user.png";
+                    $avatar = !empty($model->photo) ? "/uploads/".$model->photo : "/img/default-user.png";
                     return '<img class="avatar" src="'.$avatar.'" />';
                 },
                 'format' => 'html'

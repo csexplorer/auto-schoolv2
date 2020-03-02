@@ -38,7 +38,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'address',
                 'phone_number',
                 'photo',
-                'start_date',
+                [
+                    'attribute' => 'start_date',
+                    'value' => function ($val) {
+                        return date('d.m.Y', $val->start_date);
+                    }
+                ],
                 'payment',
                 [
                     'attribute' => 'category_id',

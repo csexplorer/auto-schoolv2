@@ -50,7 +50,6 @@ $this->registerJs($script);
                 'value' => 'category.name'
             ],
 
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

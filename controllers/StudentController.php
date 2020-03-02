@@ -96,7 +96,7 @@ class StudentController extends Controller
             'dataProvider' => $dataProvider,
 //            'groupAndSubject' => $groupAndSubject,
             'subject_id' => $subject_id,
-            'group_id'=> $group_id,
+            'group_id' => $group_id,
             'attendance' => $attendance
         ]);
     }
@@ -107,6 +107,7 @@ class StudentController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+
     /**
      * Displays a single Student model.
      * @param integer $id
@@ -143,10 +144,14 @@ class StudentController extends Controller
     {
         $model = new Student();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->start_date = strtotime($model->start_date);
+
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
-        
+
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -162,9 +167,14 @@ class StudentController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->start_date = date('d.m.Y', $model->start_date);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->start_date = strtotime($model->start_date);
+
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [

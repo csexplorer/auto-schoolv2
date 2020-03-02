@@ -16,12 +16,11 @@ $script = <<< JS
      var saveMarkButton = $('.save-mark');
      saveMarkButton.hide();
      var lastTh = $('#student-marks-container thead > tr:first-child > th:last-child').prev();
-     console.log(lastTh);
      var lastTd = $('.last-col');
          lastTh.hide();
          lastTd.hide();
      $('#mark-date').on('change', function() {
-         var selectedDate = $(this).val()
+         var selectedDate = $(this).val();
         var intDate = new Date(selectedDate).getTime();
         if (intDate + 24*60*60*1000 > Date.now()) {
             saveMarkButton.show();
@@ -36,7 +35,7 @@ $script = <<< JS
          lastTd.show();
         }else {
         alert("Siz tanlangan sanaga baho qoyolmaysiz")}
-     })
+     });
    $('.mark-cell').on('dblclick', function() {
      var shu = $(this);
      var input = document.createElement('input');
@@ -190,7 +189,7 @@ $columns[] = [
                 'options' => ['placeholder' => 'Baho yaratish'],
                 'pluginOptions' => [
                     'autoclose' => true,
-                    'format' => 'dd-M-yyyy',
+                    'format' => 'dd.mm.yyyy',
                     'todayHighlight' => true
                 ]
             ]); ?>

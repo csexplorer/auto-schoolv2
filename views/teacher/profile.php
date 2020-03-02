@@ -12,13 +12,12 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 $labels = ['danger', 'success', 'info', 'warning', 'primary'];
 
-$avatar = !empty($model->photo) ? '/web/uploads/'.$model->photo : '/web/img/default-user.png';
+$avatar = !empty($model->photo) ? '/uploads/'.$model->photo : '/img/default-user.png';
 ?>
 <div class="teacher-profile">
 
     <!-- Main content -->
     <section class="content">
-<?=Yii::$app->security->decryptByPassword(utf8_decode('ð¸¬µ]öRz×mGO5336eeb7059ab8cecc160f627abd43595c9c69177cb2d8c28000639595771a7b9êJ·ØeÃRBµÈ{òZßJC	N§Â\ãÌËa'), 'WHATEVER_SECRET');?>
         <div class="row">
             <div class="col-md-3">
 

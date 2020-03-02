@@ -37,7 +37,6 @@ $this->registerJs($script);
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-
             ['class' => 'yii\grid\SerialColumn'],
             [
                 'class' => '\kartik\grid\CheckboxColumn',
@@ -53,7 +52,6 @@ $this->registerJs($script);
                 'label' => 'Category',
                 'value' => 'category.name'
             ],
-
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -18,7 +18,7 @@ use yii\helpers\Url;
         </a>
 
         <div class="navbar-custom-menu">
-            <?php if (!Yii::$app->user->isGuest) : $user = Yii::$app->user->identity; $avatar = !empty($user->photo) ? '/web/uploads/'.$user->photo : '/web/img/default-user.png'; ?>
+            <?php if (!Yii::$app->user->isGuest) : $user = Yii::$app->user->identity; $avatar = !empty($user->photo) ? '/uploads/'.$user->photo : '/img/default-user.png'; ?>
                 <ul class="nav navbar-nav">
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
