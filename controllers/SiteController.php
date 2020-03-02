@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Category;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -18,17 +19,19 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
+//            'access' => [
+//                'class' => AccessControl::className(),
+//                'rules' => [
+//                    [
+//                        'allow' => true,
+//                        'actions' => ['index']
+//                    ],
+//                    [
+//                        'allow' => true,
+//                        'roles' => ['admin']
+//                    ]
+//                ]
+//            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -61,7 +64,21 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $user = Yii::$app->user;
+        if ($user->can('admin')) {
+            $categories = Category::find()->all();
+            return $this->render('index', ['categories' => $categories]);
+        } else{
+            return $this->redirect(['teacher/groups']);
+        } 
+    }
+
+    public function actionChoose($group_id, $subject_id)
+    {
+        return $this->render('choose', [
+            'group_id' => $group_id,
+            'subject_id' => $subject_id
+        ]);
     }
 
     /**
@@ -71,6 +88,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $this->layout = "main-login";
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -95,7 +113,7 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
 
-        return $this->goHome();
+        return $this->redirect(['site/login']);
     }
 
     /**

@@ -5,12 +5,15 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'language' => 'uz-UZ',
+    'name' => "E - JOURNAL",
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'timeZone' => 'Asia/Tashkent',
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -43,6 +46,10 @@ $config = [
             ],
         ],
         'db' => $db,
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager',
+            'defaultRoles' => ['teacher', 'admin']
+        ],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -52,7 +59,25 @@ $config = [
         ],
         */
     ],
+    'as beforeRequest' => [
+        'class' => 'yii\filters\AccessControl',
+        'rules' => [
+            [
+                'actions' => ['login', 'error'],
+                'allow' => true,
+            ],
+            [
+                'allow' => true,
+                'roles' => ['@'],
+            ],
+        ],
+    ],
     'params' => $params,
+    'modules' => [
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module'
+        ]
+    ],
 ];
 
 if (YII_ENV_DEV) {
